@@ -13,8 +13,8 @@ using namespace std::literals;
 namespace roq {
 namespace pubsub {
 
-Config::Config(const std::string_view &config_path, const std::string_view &secrets_path) {
-  server::ConfigReader::parse_file(*this, config_path, secrets_path);
+Config::Config(const std::string_view &config_path) {
+  server::ConfigReader::parse_file(*this, config_path, {});
 }
 
 std::string Config::get_master_account() const {
@@ -29,14 +29,6 @@ std::string Config::get_api_key(const std::string_view &account) const {
   return (*iter).second.login;
 }
 
-std::string Config::get_secret(const std::string_view &account) const {
-  auto iter = accounts.find(account);
-  if (iter == accounts.end()) {
-    log::fatal(R"(Unknown account="{}")"sv, account);
-  }
-  return (*iter).second.secret;
-}
-
 void Config::dispatch(server::Config::Handler &handler) const {
   handler(Flags::exchange());
   handler(symbols);
@@ -45,24 +37,13 @@ void Config::dispatch(server::Config::Handler &handler) const {
   for (auto &user : users)
     handler(user);
   server::Settings settings{
-      .supports{
-          SupportType::TOP_OF_BOOK,
-          SupportType::MARKET_BY_PRICE,
-          SupportType::TRADE_SUMMARY,
-          SupportType::STATISTICS,
-          SupportType::REFERENCE_DATA,
-          SupportType::MARKET_STATUS,
-          SupportType::CREATE_ORDER,
-          SupportType::CANCEL_ORDER,
-          SupportType::ORDER_ACK,
-          SupportType::FUNDS,
-      },
+      .supports = {},
       .mbp_max_depth = {},
       .mbp_tick_size_multiplier = NaN,
       .mbp_min_trade_vol_multiplier = NaN,
-      .mbp_allow_remove_non_existing = true,
-      .mbp_allow_price_inversion = Flags::mbp_allow_price_inversion(),
-      .oms_request_id_type = server::RequestIdType::BASE64,
+      .mbp_allow_remove_non_existing = {},
+      .mbp_allow_price_inversion = {},
+      .oms_request_id_type = {},
       .oms_download_has_state = {},
       .oms_download_has_routing_id = {},
   };

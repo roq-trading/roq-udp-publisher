@@ -1,28 +1,11 @@
 set(TARGET_NAME "${PROJECT_NAME}-test")
 
-set(SOURCES
-    json_account.cpp
-    json_cancel_all_open_orders.cpp
-    json_cancel_order.cpp
-    json_exchange_info.cpp
-    json_execution_report.cpp
-    json_filters.cpp
-    json_listen_key.cpp
-    json_new_order.cpp
-    json_open_orders.cpp
-    json_outbound_account_position.cpp
-    main.cpp)
+set(SOURCES main.cpp)
 
 add_executable("${TARGET_NAME}" ${SOURCES})
 
-target_link_libraries(
-  "${TARGET_NAME}"
-  "${PROJECT_NAME}-json"
-  roq-server::roq-server
-  roq-core::roq-core
-  fmt::fmt
-  gtest_main
-  ${RT_LIBRARIES})
+target_link_libraries("${TARGET_NAME}" roq-server::roq-server roq-core::roq-core fmt::fmt
+                      gtest_main ${RT_LIBRARIES})
 
 target_compile_features("${TARGET_NAME}" PUBLIC cxx_std_17)
 

@@ -1,8 +1,0 @@
-{
-"name": "Side",
-"type": "enum",
-"values": [
-	{ "name": "BUY" },
-	{ "name": "SELL" }
-]
-}

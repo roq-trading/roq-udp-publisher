@@ -2,62 +2,13 @@ set(TARGET_NAME "${PROJECT_NAME}")
 
 add_subdirectory(flags)
 
-set(SOURCES
-    application.cpp
-    config.cpp
-    drop_copy.cpp
-    flags.cpp
-    gateway.cpp
-    market_data.cpp
-    order_entry.cpp
-    rest.cpp
-    security.cpp
-    shared.cpp
-    main.cpp)
+set(SOURCES application.cpp config.cpp flags.cpp gateway.cpp shared.cpp main.cpp)
 
-add_subdirectory("json")
-add_subdirectory("tools")
-
-include(RoqAutogen)
-
-set(AUTOGEN_SCHEMAS drop_copy_state.json market_data_state.json order_entry_state.json
-                    rest_state.json)
-
-roq_autogen(
-  OUTPUT
-  AUTOGEN_HEADERS
-  NAMESPACE
-  "roq/pubsub"
-  OUTPUT_TYPE
-  "state"
-  FILE_TYPE
-  "h"
-  SOURCES
-  ${AUTOGEN_SCHEMAS})
-
-add_custom_target(autogen-headers ALL DEPENDS ${AUTOGEN_HEADERS})
-
-roq_autogen(
-  OUTPUT
-  AUTOGEN_SOURCES
-  NAMESPACE
-  "roq/pubsub"
-  OUTPUT_TYPE
-  "state"
-  FILE_TYPE
-  "cpp"
-  SOURCES
-  ${AUTOGEN_SCHEMAS})
-
-add_executable("${TARGET_NAME}" ${SOURCES} ${AUTOGEN_SOURCES})
-
-add_dependencies("${TARGET_NAME}" autogen-headers autogen-json-headers)
+add_executable("${TARGET_NAME}" ${SOURCES})
 
 target_link_libraries(
   "${TARGET_NAME}"
-  "${PROJECT_NAME}-json"
   "${PROJECT_NAME}-flags"
-  "${PROJECT_NAME}-tools"
   roq-server::roq-server
   roq-core::roq-core
   roq-logging::roq-logging

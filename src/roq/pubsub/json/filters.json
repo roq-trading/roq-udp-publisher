@@ -1,7 +1,0 @@
-{
-"name": "Filters",
-"type": "array",
-"values": [
-	{ "name": "data", "type": "roq::span<Filter>" }
-]
-}

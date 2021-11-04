@@ -2,33 +2,17 @@
 
 #pragma once
 
-#include <absl/container/flat_hash_map.h>
-
-#include <memory>
-#include <string>
-#include <utility>
-#include <vector>
-
 #include "roq/server.h"
 
 #include "roq/core/io/context.h"
 
 #include "roq/pubsub/config.h"
-#include "roq/pubsub/drop_copy.h"
-#include "roq/pubsub/market_data.h"
-#include "roq/pubsub/order_entry.h"
-#include "roq/pubsub/rest.h"
-#include "roq/pubsub/security.h"
 #include "roq/pubsub/shared.h"
 
 namespace roq {
 namespace pubsub {
 
-class Gateway final : public server::Handler,
-                      public Rest::Handler,
-                      public MarketData::Handler,
-                      public OrderEntry::Handler,
-                      public DropCopy::Handler {
+class Gateway final : public server::Handler {
  public:
   Gateway(server::Dispatcher &, const Config &);
 
@@ -56,31 +40,8 @@ class Gateway final : public server::Handler,
 
   void operator()(metrics::Writer &) override;
 
-  // many
-
-  void operator()(const server::Trace<StreamStatus> &) override;
-  void operator()(const server::Trace<ExternalLatency> &) override;
-  void operator()(const server::Trace<ReferenceData> &, bool is_last) override;
-  void operator()(const server::Trace<MarketStatus> &, bool is_last) override;
-  void operator()(const server::Trace<TopOfBook> &, bool is_last) override;
-  void operator()(const server::Trace<MarketByPriceUpdate> &, bool is_last, bool refresh) override;
-  void operator()(const server::Trace<TradeSummary> &, bool is_last) override;
-  void operator()(const server::Trace<StatisticsUpdate> &, bool is_last) override;
-  void operator()(const server::Trace<TradeUpdate> &, bool is_last, uint8_t user_id) override;
-  void operator()(const server::Trace<FundsUpdate> &, bool is_last) override;
-
-  void operator()(Rest::SymbolsUpdate &) override;
-
-  void operator()(const OrderEntry::ListenKeyUpdate &) override;
-
-  // utilities
-
-  OrderEntry &get_order_entry(const std::string_view &account);
-
  private:
   server::Dispatcher &dispatcher_;
-  // security
-  absl::flat_hash_map<std::string, std::unique_ptr<Security>> security_;
   // io
   core::io::Context context_;
   // shared
@@ -88,10 +49,6 @@ class Gateway final : public server::Handler,
   // seed
   uint16_t stream_id_ = {};
   // streams
-  Rest rest_;
-  absl::flat_hash_map<std::string, std::unique_ptr<OrderEntry>> order_entry_;
-  absl::flat_hash_map<std::string, std::unique_ptr<DropCopy>> drop_copy_;
-  std::vector<std::unique_ptr<MarketData>> market_data_;
 };
 
 }  // namespace pubsub
