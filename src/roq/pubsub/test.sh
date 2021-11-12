@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+CWD="$(realpath "$(dirname "${BASH_SOURCE[0]}")")"
+
+if [ "$1" == "debug" ]; then
+	PREFIX="gdb --args"
+else
+	PREFIX=
+fi
+
+NAME="pubsub"
+
+CONFIG_FILE="$CWD/config/$NAME.toml"
+
+$PREFIX ./roq-pubsub \
+	--name "pubsub" \
+	--config_file "$CONFIG_FILE" \
+	--client_listen_address $CWD/$NAME.sock \
+	--metrics_listen_address 1234 \
+	$@
