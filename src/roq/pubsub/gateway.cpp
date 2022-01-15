@@ -37,7 +37,7 @@ uint16_t Gateway::operator()(
     const Event<CreateOrder> &,
     const oms::Order &,
     [[maybe_unused]] const std::string_view &request_id) {
-  throw oms::NotSupportedException();
+  throw oms::NotSupported("not supported"sv);
 }
 
 uint16_t Gateway::operator()(
@@ -45,7 +45,7 @@ uint16_t Gateway::operator()(
     const oms::Order &,
     [[maybe_unused]] const std::string_view &request_id,
     [[maybe_unused]] const std::string_view &previous_request_id) {
-  throw oms::NotSupportedException();
+  throw oms::NotSupported("not supported"sv);
 }
 
 uint16_t Gateway::operator()(
@@ -53,12 +53,12 @@ uint16_t Gateway::operator()(
     const oms::Order &,
     [[maybe_unused]] const std::string_view &request_id,
     [[maybe_unused]] const std::string_view &previous_request_id) {
-  throw oms::NotSupportedException();
+  throw oms::NotSupported("not supported"sv);
 }
 
 uint16_t Gateway::operator()(
     const Event<CancelAllOrders> &, [[maybe_unused]] const std::string_view &request_id) {
-  throw oms::NotSupportedException();
+  throw oms::NotSupported("not supported"sv);
 }
 
 void Gateway::operator()(metrics::Writer &) {
