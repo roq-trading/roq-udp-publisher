@@ -1,10 +1,10 @@
 /* Copyright (c) 2017-2022, Hans Erik Thrane */
 
-#include "roq/pubsub/gateway.h"
+#include "roq/pubsub/gateway.hpp"
 
-#include "roq/logging.h"
+#include "roq/logging.hpp"
 
-#include "roq/pubsub/flags.h"
+#include "roq/pubsub/flags.hpp"
 
 using namespace std::literals;
 

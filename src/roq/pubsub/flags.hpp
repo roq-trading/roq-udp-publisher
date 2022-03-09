@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "roq/pubsub/flags/flags.h"
+#include "roq/pubsub/flags/flags.hpp"
 
 namespace roq {
 namespace pubsub {

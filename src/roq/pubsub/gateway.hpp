@@ -2,12 +2,12 @@
 
 #pragma once
 
-#include "roq/server.h"
+#include "roq/server.hpp"
 
-#include "roq/core/io/context.h"
+#include "roq/core/io/context.hpp"
 
-#include "roq/pubsub/config.h"
-#include "roq/pubsub/shared.h"
+#include "roq/pubsub/config.hpp"
+#include "roq/pubsub/shared.hpp"
 
 namespace roq {
 namespace pubsub {

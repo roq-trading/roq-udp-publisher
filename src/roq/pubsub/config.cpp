@@ -1,12 +1,12 @@
 /* Copyright (c) 2017-2022, Hans Erik Thrane */
 
-#include "roq/pubsub/config.h"
+#include "roq/pubsub/config.hpp"
 
 #include <utility>
 
-#include "roq/logging.h"
+#include "roq/logging.hpp"
 
-#include "roq/pubsub/flags.h"
+#include "roq/pubsub/flags.hpp"
 
 using namespace std::literals;
 
