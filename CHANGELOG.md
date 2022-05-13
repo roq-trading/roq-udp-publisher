@@ -4,14 +4,4 @@ All notable changes will be documented in this file.
 
 ## Head
 
-## 0.8.3 &ndash; 2022-03-22
-
-## 0.8.2 &ndash; 2022-02-18
-
-## 0.8.1 &ndash; 2022-01-16
-
-## 0.8.0 &ndash; 2022-01-12
-
-## 0.7.9 &ndash; 2021-12-08
-
-## 0.7.8 &ndash; 2021-11-02
+## 0.8.4 &ndash; 2022-05-14
