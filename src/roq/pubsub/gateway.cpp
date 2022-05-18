@@ -11,53 +11,49 @@ using namespace std::literals;
 namespace roq {
 namespace pubsub {
 
-Gateway::Gateway(server::Dispatcher &dispatcher, const Config &)
-    : dispatcher_(dispatcher), shared_(dispatcher) {
+Gateway::Gateway(server::Dispatcher &dispatcher, Config const &) : dispatcher_(dispatcher), shared_(dispatcher) {
 }
 
-void Gateway::operator()(const Event<Start> &) {
+void Gateway::operator()(Event<Start> const &) {
   log::info("Starting the gateway..."sv);
 }
 
-void Gateway::operator()(const Event<Stop> &) {
+void Gateway::operator()(Event<Stop> const &) {
   log::info("Stopping the gateway..."sv);
 }
 
-void Gateway::operator()(const Event<Timer> &) {
+void Gateway::operator()(Event<Timer> const &) {
   context_.dispatch(true);
 }
 
-void Gateway::operator()(const Event<Connected> &) {
+void Gateway::operator()(Event<Connected> const &) {
 }
 
-void Gateway::operator()(const Event<Disconnected> &) {
+void Gateway::operator()(Event<Disconnected> const &) {
 }
 
 uint16_t Gateway::operator()(
-    const Event<CreateOrder> &,
-    const oms::Order &,
-    [[maybe_unused]] const std::string_view &request_id) {
+    Event<CreateOrder> const &, oms::Order const &, [[maybe_unused]] std::string_view const &request_id) {
   throw oms::NotSupported("not supported"sv);
 }
 
 uint16_t Gateway::operator()(
-    const Event<ModifyOrder> &,
-    const oms::Order &,
-    [[maybe_unused]] const std::string_view &request_id,
-    [[maybe_unused]] const std::string_view &previous_request_id) {
+    Event<ModifyOrder> const &,
+    oms::Order const &,
+    [[maybe_unused]] std::string_view const &request_id,
+    [[maybe_unused]] std::string_view const &previous_request_id) {
   throw oms::NotSupported("not supported"sv);
 }
 
 uint16_t Gateway::operator()(
-    const Event<CancelOrder> &,
-    const oms::Order &,
-    [[maybe_unused]] const std::string_view &request_id,
-    [[maybe_unused]] const std::string_view &previous_request_id) {
+    Event<CancelOrder> const &,
+    oms::Order const &,
+    [[maybe_unused]] std::string_view const &request_id,
+    [[maybe_unused]] std::string_view const &previous_request_id) {
   throw oms::NotSupported("not supported"sv);
 }
 
-uint16_t Gateway::operator()(
-    const Event<CancelAllOrders> &, [[maybe_unused]] const std::string_view &request_id) {
+uint16_t Gateway::operator()(Event<CancelAllOrders> const &, [[maybe_unused]] std::string_view const &request_id) {
   throw oms::NotSupported("not supported"sv);
 }
 

@@ -20,11 +20,11 @@ namespace pubsub {
 
 class Config final : public server::Config, public server::ConfigReader::Handler {
  public:
-  Config(const std::string_view &config_path);
+  Config(std::string_view const &config_path);
 
   std::string get_master_account() const;
 
-  std::string get_api_key(const std::string_view &account) const;
+  std::string get_api_key(std::string_view const &account) const;
 
  protected:
   // server::Config
@@ -35,7 +35,7 @@ class Config final : public server::Config, public server::ConfigReader::Handler
   void operator()(server::Account &&) override;
   void operator()(server::User &&) override;
   void operator()(server::RateLimit &&) override;
-  void operator()(const std::string_view &key, toml::node &) override;
+  void operator()(std::string_view const &key, toml::node &) override;
 
  public:
   std::vector<server::User> users;
@@ -66,7 +66,7 @@ struct fmt::formatter<roq::pubsub::Config> {
     return std::begin(context);
   }
   template <typename Context>
-  auto format(const roq::pubsub::Config &value, Context &context) {
+  auto format(roq::pubsub::Config const &value, Context &context) {
     using namespace std::literals;
     return fmt::format_to(
         context.out(),

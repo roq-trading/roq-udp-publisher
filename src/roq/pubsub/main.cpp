@@ -5,7 +5,7 @@
 using namespace std::literals;
 
 namespace {
-const auto DESCRIPTION = "Roq PubSub Service"sv;
+auto const DESCRIPTION = "Roq PubSub Service"sv;
 }  // namespace
 
 int main(int argc, char **argv) {

@@ -14,29 +14,28 @@ namespace pubsub {
 
 class Gateway final : public server::Handler {
  public:
-  Gateway(server::Dispatcher &, const Config &);
+  Gateway(server::Dispatcher &, Config const &);
 
  protected:
-  void operator()(const Event<Start> &) override;
-  void operator()(const Event<Stop> &) override;
-  void operator()(const Event<Timer> &) override;
-  void operator()(const Event<Connected> &) override;
-  void operator()(const Event<Disconnected> &) override;
+  void operator()(Event<Start> const &) override;
+  void operator()(Event<Stop> const &) override;
+  void operator()(Event<Timer> const &) override;
+  void operator()(Event<Connected> const &) override;
+  void operator()(Event<Disconnected> const &) override;
 
+  uint16_t operator()(Event<CreateOrder> const &, oms::Order const &, std::string_view const &request_id) override;
   uint16_t operator()(
-      const Event<CreateOrder> &, const oms::Order &, const std::string_view &request_id) override;
+      Event<ModifyOrder> const &,
+      oms::Order const &,
+      std::string_view const &request_id,
+      std::string_view const &previous_request_id) override;
   uint16_t operator()(
-      const Event<ModifyOrder> &,
-      const oms::Order &,
-      const std::string_view &request_id,
-      const std::string_view &previous_request_id) override;
-  uint16_t operator()(
-      const Event<CancelOrder> &,
-      const oms::Order &,
-      const std::string_view &request_id,
-      const std::string_view &previous_request_id) override;
+      Event<CancelOrder> const &,
+      oms::Order const &,
+      std::string_view const &request_id,
+      std::string_view const &previous_request_id) override;
 
-  uint16_t operator()(const Event<CancelAllOrders> &, const std::string_view &request_id) override;
+  uint16_t operator()(Event<CancelAllOrders> const &, std::string_view const &request_id) override;
 
   void operator()(metrics::Writer &) override;
 
