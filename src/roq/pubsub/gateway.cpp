@@ -4,6 +4,8 @@
 
 #include "roq/logging.hpp"
 
+#include "roq/core/io/context_factory.hpp"
+
 #include "roq/pubsub/flags.hpp"
 
 using namespace std::literals;
@@ -11,7 +13,8 @@ using namespace std::literals;
 namespace roq {
 namespace pubsub {
 
-Gateway::Gateway(server::Dispatcher &dispatcher, Config const &) : dispatcher_(dispatcher), shared_(dispatcher) {
+Gateway::Gateway(server::Dispatcher &dispatcher, Config const &)
+    : dispatcher_(dispatcher), context_(core::io::ContextFactory::create()), shared_(dispatcher) {
 }
 
 void Gateway::operator()(Event<Start> const &) {
@@ -23,7 +26,7 @@ void Gateway::operator()(Event<Stop> const &) {
 }
 
 void Gateway::operator()(Event<Timer> const &) {
-  context_.dispatch(true);
+  (*context_).drain();
 }
 
 void Gateway::operator()(Event<Connected> const &) {

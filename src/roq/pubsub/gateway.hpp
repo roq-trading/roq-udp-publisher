@@ -42,7 +42,7 @@ class Gateway final : public server::Handler {
  private:
   server::Dispatcher &dispatcher_;
   // io
-  core::io::Context context_;
+  std::unique_ptr<core::io::Context> context_;
   // shared
   Shared shared_;
   // seed
