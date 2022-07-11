@@ -4,7 +4,7 @@
 
 #include "roq/logging.hpp"
 
-#include "roq/core/io/event_context.hpp"
+#include "roq/io/event/context_factory.hpp"
 
 #include "roq/pubsub/flags.hpp"
 
@@ -14,7 +14,7 @@ namespace roq {
 namespace pubsub {
 
 Gateway::Gateway(server::Dispatcher &dispatcher, Config const &)
-    : dispatcher_(dispatcher), context_(core::io::EventContext::create()), shared_(dispatcher) {
+    : dispatcher_(dispatcher), context_(io::event::ContextFactory::create()), shared_(dispatcher) {
 }
 
 void Gateway::operator()(Event<Start> const &) {
