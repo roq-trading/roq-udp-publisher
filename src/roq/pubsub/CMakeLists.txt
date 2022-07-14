@@ -13,7 +13,7 @@ target_link_libraries(
           roq-server::roq-server
           roq-core::roq-core
           roq-io::roq-io
-          absl::flags
+          absl::flags_parse
           absl::flat_hash_map
           absl::flat_hash_set
           ${UUID_LIBRARIES}
