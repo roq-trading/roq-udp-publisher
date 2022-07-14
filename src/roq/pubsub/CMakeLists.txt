@@ -8,16 +8,16 @@ add_executable("${TARGET_NAME}" ${SOURCES})
 
 target_link_libraries(
   "${TARGET_NAME}"
-  "${PROJECT_NAME}-flags"
-  roq-server::roq-server
-  roq-core::roq-core
-  roq-io::roq-io
-  roq-logging::roq-logging
-  absl::flags
-  absl::flat_hash_map
-  absl::flat_hash_set
-  ${UUID_LIBRARIES}
-  ${RT_LIBRARIES})
+  PUBLIC roq-api::roq-api roq-logging::roq-logging
+  PRIVATE "${PROJECT_NAME}-flags"
+          roq-server::roq-server
+          roq-core::roq-core
+          roq-io::roq-io
+          absl::flags
+          absl::flat_hash_map
+          absl::flat_hash_set
+          ${UUID_LIBRARIES}
+          ${RT_LIBRARIES})
 
 target_compile_features("${TARGET_NAME}" PUBLIC cxx_std_20)
 
