@@ -10,8 +10,8 @@ target_link_libraries(
   "${TARGET_NAME}"
   PRIVATE "${PROJECT_NAME}-flags"
           roq-server::roq-server
-          roq-core::roq-core
           roq-io::roq-io
+          roq-core::roq-core
           roq-logging::roq-logging
           roq-api::roq-api
           fmt::fmt
