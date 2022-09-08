@@ -1,15 +1,15 @@
 /* Copyright (c) 2017-2022, Hans Erik Thrane */
 
-#include "roq/pubsub/application.hpp"
+#include "roq/udp_publisher/application.hpp"
 
-#include "roq/pubsub/config.hpp"
-#include "roq/pubsub/flags.hpp"
-#include "roq/pubsub/gateway.hpp"
+#include "roq/udp_publisher/config.hpp"
+#include "roq/udp_publisher/flags.hpp"
+#include "roq/udp_publisher/gateway.hpp"
 
 using namespace std::literals;
 
 namespace roq {
-namespace pubsub {
+namespace udp_publisher {
 
 int Application::main(int, char **) {
   log::info(R"(Parse config_file="{}")"sv, Flags::config_file());
@@ -20,5 +20,5 @@ int Application::main(int, char **) {
   return EXIT_SUCCESS;
 }
 
-}  // namespace pubsub
+}  // namespace udp_publisher
 }  // namespace roq

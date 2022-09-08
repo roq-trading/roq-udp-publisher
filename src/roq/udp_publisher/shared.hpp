@@ -15,7 +15,7 @@
 #include "roq/core/memory.hpp"
 
 namespace roq {
-namespace pubsub {
+namespace udp_publisher {
 
 struct Shared final {
   explicit Shared(server::Dispatcher &);
@@ -33,5 +33,5 @@ struct Shared final {
   server::Dispatcher &dispatcher_;
 };
 
-}  // namespace pubsub
+}  // namespace udp_publisher
 }  // namespace roq

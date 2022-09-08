@@ -1,17 +1,17 @@
 /* Copyright (c) 2017-2022, Hans Erik Thrane */
 
-#include "roq/pubsub/gateway.hpp"
+#include "roq/udp_publisher/gateway.hpp"
 
 #include "roq/logging.hpp"
 
 #include "roq/io/engine/context_factory.hpp"
 
-#include "roq/pubsub/flags.hpp"
+#include "roq/udp_publisher/flags.hpp"
 
 using namespace std::literals;
 
 namespace roq {
-namespace pubsub {
+namespace udp_publisher {
 
 Gateway::Gateway(server::Dispatcher &dispatcher, Config const &)
     : dispatcher_(dispatcher), context_(io::engine::ContextFactory::create_libevent()), shared_(dispatcher) {
@@ -63,5 +63,5 @@ uint16_t Gateway::operator()(Event<CancelAllOrders> const &, [[maybe_unused]] st
 void Gateway::operator()(metrics::Writer &) {
 }
 
-}  // namespace pubsub
+}  // namespace udp_publisher
 }  // namespace roq

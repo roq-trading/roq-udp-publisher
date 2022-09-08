@@ -5,7 +5,7 @@
 #include "roq/service.hpp"
 
 namespace roq {
-namespace pubsub {
+namespace udp_publisher {
 
 class Application final : public roq::Service {
  public:
@@ -15,5 +15,5 @@ class Application final : public roq::Service {
   int main(int, char **) override;
 };
 
-}  // namespace pubsub
+}  // namespace udp_publisher
 }  // namespace roq

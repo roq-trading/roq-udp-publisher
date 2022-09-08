@@ -13,7 +13,7 @@ message("Using GIT_REPO_VERSION=${GIT_REPO_VERSION}")
 
 # project
 
-project(roq-pubsub VERSION ${GIT_REPO_VERSION})
+project(roq-udp-publisher VERSION ${GIT_REPO_VERSION})
 
 # conda
 
@@ -71,7 +71,7 @@ include_directories(
 
 # sub-projects
 
-add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/src/roq/pubsub")
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/src/roq/udp_publisher")
 
 # test
 
@@ -95,7 +95,7 @@ endif(BUILD_BENCHMARK)
 
 # install
 
-install(FILES "share/config.toml" DESTINATION "${CMAKE_INSTALL_DATADIR}/roq-pubsub")
+install(FILES "share/config.toml" DESTINATION "${CMAKE_INSTALL_DATADIR}/roq-udp-publisher")
 
 install(FILES "${CMAKE_SOURCE_DIR}/CHANGELOG.md"
         DESTINATION "${CMAKE_INSTALL_DATADIR}/doc/${PROJECT_NAME}")

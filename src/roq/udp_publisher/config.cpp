@@ -1,17 +1,17 @@
 /* Copyright (c) 2017-2022, Hans Erik Thrane */
 
-#include "roq/pubsub/config.hpp"
+#include "roq/udp_publisher/config.hpp"
 
 #include <utility>
 
 #include "roq/logging.hpp"
 
-#include "roq/pubsub/flags.hpp"
+#include "roq/udp_publisher/flags.hpp"
 
 using namespace std::literals;
 
 namespace roq {
-namespace pubsub {
+namespace udp_publisher {
 
 Config::Config(std::string_view const &config_path) {
   server::ConfigReader::parse_file(*this, config_path, {});
@@ -74,5 +74,5 @@ void Config::operator()(std::string_view const &key, toml::node &) {
   log::warn(R"(Unexpected: key="{}")"sv, key);
 }
 
-}  // namespace pubsub
+}  // namespace udp_publisher
 }  // namespace roq

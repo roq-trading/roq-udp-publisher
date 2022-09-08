@@ -2,12 +2,12 @@
 
 #pragma once
 
-#include "roq/pubsub/flags/flags.hpp"
+#include "roq/udp_publisher/flags/flags.hpp"
 
 namespace roq {
-namespace pubsub {
+namespace udp_publisher {
 
 using flags::Flags;
 
-}  // namespace pubsub
+}  // namespace udp_publisher
 }  // namespace roq

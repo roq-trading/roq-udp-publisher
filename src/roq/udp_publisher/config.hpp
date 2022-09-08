@@ -16,7 +16,7 @@
 #include "roq/server.hpp"
 
 namespace roq {
-namespace pubsub {
+namespace udp_publisher {
 
 class Config final : public server::Config, public server::ConfigReader::Handler {
  public:
@@ -47,26 +47,26 @@ class Config final : public server::Config, public server::ConfigReader::Handler
 
 /*
  * REST API
- * https://api-public.sandbox.pro.pubsub.com
+ * https://api-public.sandbox.pro.udp_publisher.com
  *
  * Websocket Feed
- * wss://ws-feed-public.sandbox.pro.pubsub.com
+ * wss://ws-feed-public.sandbox.pro.udp_publisher.com
  *
  * FIX API
- * tcp+ssl://fix-public.sandbox.pro.pubsub.com:4198
+ * tcp+ssl://fix-public.sandbox.pro.udp_publisher.com:4198
  */
 
-}  // namespace pubsub
+}  // namespace udp_publisher
 }  // namespace roq
 
 template <>
-struct fmt::formatter<roq::pubsub::Config> {
+struct fmt::formatter<roq::udp_publisher::Config> {
   template <typename Context>
   constexpr auto parse(Context &context) {
     return std::begin(context);
   }
   template <typename Context>
-  auto format(roq::pubsub::Config const &value, Context &context) const {
+  auto format(roq::udp_publisher::Config const &value, Context &context) const {
     using namespace std::literals;
     return fmt::format_to(
         context.out(),

@@ -6,11 +6,11 @@
 
 #include "roq/io/context.hpp"
 
-#include "roq/pubsub/config.hpp"
-#include "roq/pubsub/shared.hpp"
+#include "roq/udp_publisher/config.hpp"
+#include "roq/udp_publisher/shared.hpp"
 
 namespace roq {
-namespace pubsub {
+namespace udp_publisher {
 
 class Gateway final : public server::Handler {
  public:
@@ -50,5 +50,5 @@ class Gateway final : public server::Handler {
   // streams
 };
 
-}  // namespace pubsub
+}  // namespace udp_publisher
 }  // namespace roq

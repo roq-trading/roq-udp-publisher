@@ -1,15 +1,15 @@
 /* Copyright (c) 2017-2022, Hans Erik Thrane */
 
-#include "roq/pubsub/application.hpp"
+#include "roq/udp_publisher/application.hpp"
 
 using namespace std::literals;
 
 namespace {
-auto const DESCRIPTION = "Roq PubSub Service"sv;
+auto const DESCRIPTION = "Roq UDP Publisher"sv;
 }  // namespace
 
 int main(int argc, char **argv) {
-  return roq::pubsub::Application(
+  return roq::udp_publisher::Application(
              argc,
              argv,
              {

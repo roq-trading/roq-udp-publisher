@@ -8,7 +8,7 @@ roq_autogen(
   OUTPUT
   AUTOGEN_HEADERS
   NAMESPACE
-  "roq/pubsub/flags"
+  "roq/udp_publisher/flags"
   OUTPUT_TYPE
   "state"
   FILE_TYPE
@@ -22,7 +22,7 @@ roq_autogen(
   OUTPUT
   AUTOGEN_SOURCES
   NAMESPACE
-  "roq/pubsub/flags"
+  "roq/udp_publisher/flags"
   OUTPUT_TYPE
   "state"
   FILE_TYPE
