@@ -1,0 +1,9 @@
+symbols = ".*"
+
+[users]
+
+  [users.test]
+  password = "1234"
+
+  [users.trader]
+  password = "secret"

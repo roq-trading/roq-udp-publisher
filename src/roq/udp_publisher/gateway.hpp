@@ -14,7 +14,7 @@ namespace udp_publisher {
 
 class Gateway final : public server::Handler {
  public:
-  Gateway(server::Dispatcher &, Config const &);
+  Gateway(server::Dispatcher &, Config const &, io::Context &);
 
  protected:
   void operator()(Event<Start> const &) override;
@@ -42,7 +42,7 @@ class Gateway final : public server::Handler {
  private:
   server::Dispatcher &dispatcher_;
   // io
-  std::unique_ptr<io::Context> context_;
+  io::Context &context_;
   // shared
   Shared shared_;
   // seed

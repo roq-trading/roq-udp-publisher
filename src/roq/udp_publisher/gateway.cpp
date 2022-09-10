@@ -4,8 +4,6 @@
 
 #include "roq/logging.hpp"
 
-#include "roq/io/engine/context_factory.hpp"
-
 #include "roq/udp_publisher/flags.hpp"
 
 using namespace std::literals;
@@ -13,8 +11,8 @@ using namespace std::literals;
 namespace roq {
 namespace udp_publisher {
 
-Gateway::Gateway(server::Dispatcher &dispatcher, Config const &)
-    : dispatcher_(dispatcher), context_(io::engine::ContextFactory::create_libevent()), shared_(dispatcher) {
+Gateway::Gateway(server::Dispatcher &dispatcher, Config const &, io::Context &context)
+    : dispatcher_(dispatcher), context_(context), shared_(dispatcher) {
 }
 
 void Gateway::operator()(Event<Start> const &) {
@@ -26,7 +24,7 @@ void Gateway::operator()(Event<Stop> const &) {
 }
 
 void Gateway::operator()(Event<Timer> const &) {
-  (*context_).drain();
+  context_.drain();
 }
 
 void Gateway::operator()(Event<Connected> const &) {
