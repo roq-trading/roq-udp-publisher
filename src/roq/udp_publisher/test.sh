@@ -26,11 +26,11 @@ fi
 # launch
 
 $PREFIX "./roq-udp-publisher" \
-	--name "$NAME" \
-	--config_file "$CONFIG_FILE" \
+  --name "$NAME" \
+  --config_file "$CONFIG_FILE" \
   --event_log_dir "$HOME/var/lib/roq/data" \
   --event_log_symlink \
-	--client_listen_address "$HOME/run/$NAME.sock" \
-	--metrics_listen_address "$HOME/run/${NAME}_metrics.sock" \
+  --client_listen_address "$HOME/run/$NAME.sock" \
+  --metrics_listen_address "$HOME/run/${NAME}_metrics.sock" \
   --udp_port $UDP_PORT \
-	$@
+  $@

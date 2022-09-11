@@ -13,7 +13,7 @@ namespace udp_publisher {
 
 class Bridge final : public server::Hook, public io::net::udp::Sender::Handler {
  public:
-  Bridge(io::Context &);
+  explicit Bridge(io::Context &);
 
  protected:
   // server::Hook

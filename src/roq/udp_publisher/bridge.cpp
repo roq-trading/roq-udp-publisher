@@ -6,9 +6,10 @@
 
 #include "roq/logging.hpp"
 
+#include "roq/json/custom_metrics_update.hpp"
 #include "roq/json/top_of_book.hpp"
 
-#include "roq/udp_publisher/flags/flags.hpp"
+#include "roq/udp_publisher/flags.hpp"
 
 using namespace std::literals;
 
@@ -17,7 +18,7 @@ namespace udp_publisher {
 
 namespace {
 auto create_sender(auto &handler, auto &context) {
-  return context.create_udp_sender(handler, io::NetworkAddress{flags::Flags::udp_port()});
+  return context.create_udp_sender(handler, io::NetworkAddress{Flags::udp_port()});
 }
 }  // namespace
 
@@ -30,7 +31,8 @@ void Bridge::operator()(Trace<TopOfBook const> const &event) {
   send("{}\n"sv, json::TopOfBook{event});
 }
 
-void Bridge::operator()(Trace<CustomMetricsUpdate const> const &) {
+void Bridge::operator()(Trace<CustomMetricsUpdate const> const &event) {
+  send("{}\n"sv, json::CustomMetricsUpdate{event});
 }
 
 // io::net::udp::Sender::Handler
