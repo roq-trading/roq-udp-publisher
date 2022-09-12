@@ -28,11 +28,11 @@ Bridge::Bridge(io::Context &context) : context_(context), sender_(create_sender(
 // server::Hook
 
 void Bridge::operator()(Trace<TopOfBook const> const &event) {
-  send("{}\n"sv, json::TopOfBook{event});
+  send(R"(["TopOfBook",{}])"sv, json::TopOfBook{event});
 }
 
 void Bridge::operator()(Trace<CustomMetricsUpdate const> const &event) {
-  send("{}\n"sv, json::CustomMetricsUpdate{event});
+  send(R"(["CustomMetricsUpdate",{}])"sv, json::CustomMetricsUpdate{event});
 }
 
 // io::net::udp::Sender::Handler
@@ -49,7 +49,7 @@ void Bridge::send(fmt::format_string<Args...> const &fmt, Args &&...args) {
   buffer_.clear();
   fmt::format_to(std::back_inserter(buffer_), fmt, std::forward<Args>(args)...);
   std::string_view message{std::data(buffer_), std::size(buffer_)};
-  log::info<3>("{}"sv, message);
+  log::info<0>("{}"sv, message);
   (*sender_).send({reinterpret_cast<std::byte const *>(std::data(message)), std::size(message)});
 }
 
