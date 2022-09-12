@@ -12,8 +12,6 @@
 #include "roq/api.hpp"
 #include "roq/server.hpp"
 
-#include "roq/core/memory.hpp"
-
 namespace roq {
 namespace udp_publisher {
 

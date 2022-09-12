@@ -4,10 +4,12 @@ add_subdirectory(flags)
 
 set(SOURCES
     application.cpp
-    bridge.cpp
+    bridge_factory.cpp
     config.cpp
+    fbs_bridge.cpp
     flags.cpp
     gateway.cpp
+    json_bridge.cpp
     shared.cpp
     main.cpp)
 

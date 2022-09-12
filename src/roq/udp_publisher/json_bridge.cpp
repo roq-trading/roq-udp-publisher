@@ -1,6 +1,6 @@
 /* Copyright (c) 2017-2022, Hans Erik Thrane */
 
-#include "roq/udp_publisher/bridge.hpp"
+#include "roq/udp_publisher/json_bridge.hpp"
 
 #include <utility>
 
@@ -22,30 +22,30 @@ auto create_sender(auto &handler, auto &context) {
 }
 }  // namespace
 
-Bridge::Bridge(io::Context &context) : context_(context), sender_(create_sender(*this, context_)) {
+JSONBridge::JSONBridge(io::Context &context) : context_(context), sender_(create_sender(*this, context_)) {
 }
 
 // server::Hook
 
-void Bridge::operator()(Trace<TopOfBook const> const &event) {
+void JSONBridge::operator()(Trace<TopOfBook const> const &event) {
   send(R"(["TopOfBook",{}])"sv, json::TopOfBook{event});
 }
 
-void Bridge::operator()(Trace<CustomMetricsUpdate const> const &event) {
+void JSONBridge::operator()(Trace<CustomMetricsUpdate const> const &event) {
   send(R"(["CustomMetricsUpdate",{}])"sv, json::CustomMetricsUpdate{event});
 }
 
 // io::net::udp::Sender::Handler
 
-void Bridge::operator()(io::net::udp::Sender::Error const &) {
+void JSONBridge::operator()(io::net::udp::Sender::Error const &) {
   log::fatal("Unexpected"sv);
 }
 
-void Bridge::operator()(metrics::Writer &) {
+void JSONBridge::operator()(metrics::Writer &) {
 }
 
 template <typename... Args>
-void Bridge::send(fmt::format_string<Args...> const &fmt, Args &&...args) {
+void JSONBridge::send(fmt::format_string<Args...> const &fmt, Args &&...args) {
   buffer_.clear();
   fmt::format_to(std::back_inserter(buffer_), fmt, std::forward<Args>(args)...);
   std::string_view message{std::data(buffer_), std::size(buffer_)};
