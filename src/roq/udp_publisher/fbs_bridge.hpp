@@ -2,9 +2,9 @@
 
 #pragma once
 
-#include <flatbuffers/flatbuffers.h>
-
 #include "roq/server.hpp"
+
+#include "roq/core/fbs/encoder.hpp"
 
 #include "roq/io/context.hpp"
 
@@ -35,8 +35,9 @@ class FBSBridge final : public Bridge, public io::net::udp::Sender::Handler {
  private:
   io::Context &context_;
   const std::unique_ptr<io::Sender> sender_;
-  uint32_t sequence_number_ = {};
-  flatbuffers::FlatBufferBuilder builder_;
+  const uint32_t session_id_ = {};
+  uint32_t seqno_ = {};
+  core::fbs::Encoder encoder_;
 };
 
 }  // namespace udp_publisher

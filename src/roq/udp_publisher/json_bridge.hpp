@@ -33,7 +33,8 @@ class JSONBridge final : public Bridge, public io::net::udp::Sender::Handler {
  private:
   io::Context &context_;
   const std::unique_ptr<io::Sender> sender_;
-  uint32_t sequence_number_ = {};
+  const uint32_t session_id_ = {};
+  uint32_t seqno_ = {};
   std::vector<char> buffer_;
 };
 

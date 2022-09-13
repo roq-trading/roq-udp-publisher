@@ -14,6 +14,10 @@
 #include "roq/json/custom_metrics_update.hpp"
 #include "roq/json/top_of_book.hpp"
 
+#include "roq/core/clock.hpp"
+
+#include "roq/core/udp/frame.hpp"
+
 #include "roq/udp_publisher/flags.hpp"
 
 using namespace std::literals;
@@ -27,7 +31,9 @@ auto create_sender(auto &handler, auto &context) {
 }
 }  // namespace
 
-FBSBridge::FBSBridge(io::Context &context) : context_(context), sender_(create_sender(*this, context_)) {
+FBSBridge::FBSBridge(io::Context &context)
+    : context_(context), sender_(create_sender(*this, context_)),
+      session_id_(core::clock::GetRealTime<std::chrono::seconds>().count()), encoder_(4096) {
 }
 
 // server::Hook
@@ -67,14 +73,24 @@ void FBSBridge::send(Trace<T> const &event) {
       .opaque = {},
   };
   Event event_2{message_info, value};
-  builder_.Clear();
-  auto root = fbs::encode(builder_, event_2);
-  builder_.FinishSizePrefixed(root);  // note! *must* include size
-  auto data = builder_.GetBufferPointer();
-  auto length = builder_.GetSize();
-  std::span message{reinterpret_cast<std::byte const *>(data), length};
-  log::debug("{}"sv, debug::hex::Message{message});
-  (*sender_).send(message);
+  auto payload = encoder_(event_2);
+  // log::debug("{}"sv, debug::hex::Message{payload});
+  if (std::size(payload) > core::udp::MAX_PAYLOAD_LENGTH)
+    log::fatal("Unsupported"sv);
+  core::udp::Frame frame{
+      .magic = core::udp::MAGIC,
+      .encoding = core::udp::Encoding::FLATBUFFERS,
+      .total_fragments = 1,
+      .fragment_number = 0,
+      .source_session_id = session_id_,
+      .source_seqno = ++seqno_,
+      .source_sending_time_utc = core::clock::GetRealTime<std::chrono::nanoseconds>().count(),
+  };
+  std::array<std::span<std::byte const>, 2> data{{
+      frame,
+      payload,
+  }};
+  (*sender_).send(data);
 }
 
 }  // namespace udp_publisher
