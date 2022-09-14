@@ -40,13 +40,13 @@ Bridge::Bridge(io::Context &context, core::udp::Encoding encoding)
 void Bridge::operator()(io::sys::Timer::Event const &event) {
   if (event.now < next_heartbeat_)
     return;
-  next_heartbeat_ = event.now + 3s;
+  next_heartbeat_ = event.now + flags::Flags::heartbeat_freq();
   // send heartbeat (empty payload)
   core::udp::Frame frame{
       .magic = core::udp::MAGIC,
       .encoding = encoding_,
-      .total_fragments = {},
       .fragment_number = {},
+      .fragment_number_max = {},
       .source_session_id = session_id_,
       .source_seqno = ++seqno_,
       .source_sending_time_utc = core::clock::GetRealTime<std::chrono::nanoseconds>().count(),
@@ -86,8 +86,8 @@ void Bridge::send(std::span<std::byte const> const &payload) {
   core::udp::Frame frame{
       .magic = core::udp::MAGIC,
       .encoding = encoding_,
-      .total_fragments = utils::safe_cast{total_fragments - 1},
       .fragment_number = {},
+      .fragment_number_max = utils::safe_cast{total_fragments - 1},
       .source_session_id = session_id_,
       .source_seqno = ++seqno_,
       .source_sending_time_utc = core::clock::GetRealTime<std::chrono::nanoseconds>().count(),
@@ -105,7 +105,7 @@ void Bridge::send(std::span<std::byte const> const &payload) {
     }};
     (*sender_).send(data);
   }
-  assert(frame.total_fragments == frame.fragment_number);
+  assert(frame.fragment_number == frame.fragment_number_max);
 }
 
 }  // namespace udp_publisher
