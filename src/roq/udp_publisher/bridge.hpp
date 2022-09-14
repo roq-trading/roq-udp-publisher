@@ -31,7 +31,6 @@ struct Bridge : public server::Hook, public io::sys::Timer::Handler, public io::
 
   void operator()(metrics::Writer &);
 
-  void send();  // heartbeat
   void send(std::span<std::byte const> const &payload);
 
  private:
@@ -41,6 +40,7 @@ struct Bridge : public server::Hook, public io::sys::Timer::Handler, public io::
   const uint32_t session_id_ = {};
   uint32_t seqno_ = {};
   core::udp::Encoding const encoding_ = {};
+  std::chrono::nanoseconds next_heartbeat_ = {};
 };
 
 }  // namespace udp_publisher
