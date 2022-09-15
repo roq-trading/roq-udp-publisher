@@ -22,7 +22,13 @@ int Application::main(int, char **) {
   auto context = io::engine::ContextFactory::create(server::Flags::io_backend());
   auto bridge = BridgeFactory::create(*context);
   log::info("Start publisher..."sv);
-  roq::server::Router<Gateway>{ROQ_PACKAGE_NAME, ROQ_BUILD_NUMBER, {}, config, *bridge, *context}.dispatch();
+  server::Settings settings{
+      .package_name = ROQ_PACKAGE_NAME,
+      .build_number = ROQ_BUILD_NUMBER,
+      .api = {},
+      .type = server::Type::MARKET_DATA,
+  };
+  server::Router<Gateway>{settings, config, *bridge, *context}.dispatch();
   log::info("Done!"sv);
   return EXIT_SUCCESS;
 }

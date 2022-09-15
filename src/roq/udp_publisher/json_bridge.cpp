@@ -21,11 +21,11 @@ JSONBridge::JSONBridge(io::Context &context) : Bridge(context, core::udp::Encodi
 
 // server::Hook
 
-void JSONBridge::operator()(Trace<TopOfBook const> const &event) {
+void JSONBridge::operator()(Trace<TopOfBook> const &event) {
   dispatch(R"(["TopOfBook",{}])"sv, json::TopOfBook{event});
 }
 
-void JSONBridge::operator()(Trace<CustomMetricsUpdate const> const &event) {
+void JSONBridge::operator()(Trace<CustomMetricsUpdate> const &event) {
   dispatch(R"(["CustomMetricsUpdate",{}])"sv, json::CustomMetricsUpdate{event});
 }
 

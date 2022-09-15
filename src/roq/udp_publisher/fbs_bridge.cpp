@@ -24,11 +24,11 @@ FBSBridge::FBSBridge(io::Context &context) : Bridge(context, core::udp::Encoding
 
 // server::Hook
 
-void FBSBridge::operator()(Trace<TopOfBook const> const &event) {
+void FBSBridge::operator()(Trace<TopOfBook> const &event) {
   dispatch(event);
 }
 
-void FBSBridge::operator()(Trace<CustomMetricsUpdate const> const &event) {
+void FBSBridge::operator()(Trace<CustomMetricsUpdate> const &event) {
   dispatch(event);
 }
 

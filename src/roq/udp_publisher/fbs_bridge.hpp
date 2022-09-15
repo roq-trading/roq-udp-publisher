@@ -14,8 +14,8 @@ struct FBSBridge final : public Bridge {
 
  protected:
   // server::Hook
-  void operator()(Trace<TopOfBook const> const &) override;
-  void operator()(Trace<CustomMetricsUpdate const> const &) override;
+  void operator()(Trace<TopOfBook> const &) override;
+  void operator()(Trace<CustomMetricsUpdate> const &) override;
 
   template <typename T>
   void dispatch(Trace<T> const &);
