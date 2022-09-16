@@ -24,7 +24,6 @@ void Gateway::operator()(Event<Stop> const &) {
 }
 
 void Gateway::operator()(Event<Timer> const &) {
-  context_.drain();
 }
 
 void Gateway::operator()(Event<Connected> const &) {

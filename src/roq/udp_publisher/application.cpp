@@ -28,7 +28,7 @@ int Application::main(int, char **) {
       .api = {},
       .type = server::Type::MARKET_DATA,
   };
-  server::Router<Gateway>{settings, config, *bridge, *context}.dispatch();
+  server::Router<Gateway>{settings, config, *context, *bridge}.dispatch();
   log::info("Done!"sv);
   return EXIT_SUCCESS;
 }
