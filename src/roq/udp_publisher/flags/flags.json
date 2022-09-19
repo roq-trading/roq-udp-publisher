@@ -14,26 +14,6 @@
       "validator": "roq::core::flags::NonEmpty<std::string>",
       "default": "udp",
       "description": "exchange identifier (string)"
-    },
-    {
-      "name": "udp_port",
-      "type": "uint16_t",
-      "default": 0,
-      "description": "udp port"
-    },
-    {
-      "name": "heartbeat_freq",
-      "type": "std::chrono::nanoseconds",
-      "validator": "roq::core::flags::TimePeriod",
-      "default": "3s",
-      "description": "heartbeat frequency"
-    },
-    {
-      "name": "encoding",
-      "type": "std::string",
-      "validator": "roq::core::flags::NonEmpty<std::string>",
-      "default": "flatbuffers",
-      "description": "exchange identifier (string)"
     }
   ]
 }
