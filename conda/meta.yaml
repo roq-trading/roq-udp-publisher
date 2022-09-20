@@ -23,7 +23,6 @@ requirements:
   host:
     - roq-core
     - abseil-cpp
-    - flatbuffers
     - roq-oss-benchmark
     - roq-oss-brotli
     - roq-oss-catch2
