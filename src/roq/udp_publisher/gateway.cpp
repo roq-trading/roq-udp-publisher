@@ -16,11 +16,11 @@ Gateway::Gateway(server::Dispatcher &dispatcher, Config const &, io::Context &co
 }
 
 void Gateway::operator()(Event<Start> const &) {
-  log::info("Starting the gateway..."sv);
+  log::info("Starting..."sv);
 }
 
 void Gateway::operator()(Event<Stop> const &) {
-  log::info("Stopping the gateway..."sv);
+  log::info("Stopping..."sv);
 }
 
 void Gateway::operator()(Event<Timer> const &) {
