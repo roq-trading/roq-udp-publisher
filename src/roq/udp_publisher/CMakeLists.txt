@@ -18,6 +18,7 @@ target_link_libraries(
           absl::flags
           absl::flat_hash_map
           absl::flat_hash_set
+          aklomp::base64
           ${UUID_LIBRARIES}
           ${RT_LIBRARIES})
 
