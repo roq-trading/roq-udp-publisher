@@ -7,7 +7,7 @@
 namespace roq {
 namespace udp_publisher {
 
-Shared::Shared(server::Dispatcher &dispatcher) : dispatcher_(dispatcher) {
+Shared::Shared(server::Dispatcher &dispatcher) : dispatcher_{dispatcher} {
 }
 
 }  // namespace udp_publisher

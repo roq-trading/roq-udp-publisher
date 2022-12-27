@@ -16,7 +16,7 @@ namespace udp_publisher {
 // === CONSTANTS ===
 
 namespace {
-Mask<SupportType> const SUPPORTS;
+auto const SUPPORTS = Mask<SupportType>{};
 auto const OMS_REQUEST_ID_TYPE = RequestIdType::BASE64;
 }  // namespace
 

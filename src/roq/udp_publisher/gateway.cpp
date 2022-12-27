@@ -14,7 +14,7 @@ namespace udp_publisher {
 // === IMPLEMENTATION ===
 
 Gateway::Gateway(server::Dispatcher &dispatcher, Config const &, io::Context &context)
-    : dispatcher_(dispatcher), context_(context), shared_(dispatcher) {
+    : dispatcher_{dispatcher}, context_{context}, shared_{dispatcher} {
 }
 
 void Gateway::operator()(Event<Start> const &) {
