@@ -12,8 +12,7 @@
 namespace roq {
 namespace udp_publisher {
 
-class Gateway final : public server::Handler {
- public:
+struct Gateway final : public server::Handler {
   Gateway(server::Dispatcher &, Config const &, io::Context &);
 
  protected:
