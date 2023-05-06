@@ -39,14 +39,7 @@ struct Gateway final : public server::Handler {
   void operator()(metrics::Writer &) override;
 
  private:
-  server::Dispatcher &dispatcher_;
-  // io
-  io::Context &context_;
-  // shared
   Shared shared_;
-  // seed
-  uint16_t stream_id_ = {};
-  // streams
 };
 
 }  // namespace udp_publisher
