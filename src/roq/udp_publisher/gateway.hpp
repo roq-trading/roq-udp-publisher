@@ -7,13 +7,14 @@
 #include "roq/io/context.hpp"
 
 #include "roq/udp_publisher/config.hpp"
+#include "roq/udp_publisher/settings.hpp"
 #include "roq/udp_publisher/shared.hpp"
 
 namespace roq {
 namespace udp_publisher {
 
 struct Gateway final : public server::Handler {
-  Gateway(server::Dispatcher &, Config const &, io::Context &);
+  Gateway(server::Dispatcher &, Settings const &, Config const &, io::Context &);
 
  protected:
   void operator()(Event<Start> const &) override;
