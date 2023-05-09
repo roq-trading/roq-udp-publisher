@@ -4,8 +4,6 @@
 
 #include "roq/logging.hpp"
 
-#include "roq/udp_publisher/flags.hpp"
-
 using namespace std::literals;
 
 namespace roq {

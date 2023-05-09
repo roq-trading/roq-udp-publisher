@@ -2,8 +2,6 @@
 
 #include "roq/udp_publisher/shared.hpp"
 
-#include "roq/udp_publisher/flags.hpp"
-
 namespace roq {
 namespace udp_publisher {
 

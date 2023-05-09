@@ -5,7 +5,6 @@ add_subdirectory(flags)
 set(SOURCES
     application.cpp
     config.cpp
-    flags.cpp
     gateway.cpp
     settings.cpp
     shared.cpp
