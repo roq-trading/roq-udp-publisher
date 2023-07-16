@@ -7,13 +7,13 @@
 
 #include "roq/server/flags/settings.hpp"
 
+#include "roq/udp_publisher/flags/flags.hpp"
+
 namespace roq {
 namespace udp_publisher {
 
-struct Settings final : public server::flags::Settings {
+struct Settings final : public server::flags::Settings, public flags::Flags {
   explicit Settings(args::Parser const &);
-
-  std::string_view exchange;
 };
 
 }  // namespace udp_publisher
