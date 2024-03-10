@@ -1,3 +1,5 @@
-# auto-generated
-flags.cpp
+!!! THIS FILE HAS BEEN AUTO-GENERATED !!!
+roq-udp-publisher-flags
+flags.rstinc
 flags.hpp
+flags.cpp
