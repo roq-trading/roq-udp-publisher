@@ -58,8 +58,6 @@ if(BUILD_BENCHMARK)
   find_package(benchmark REQUIRED)
 endif()
 
-option(BUILD_DOCS "Enable documentation" OFF)
-
 # include
 
 include_directories(
@@ -77,3 +75,12 @@ install(FILES share/config.toml DESTINATION ${CMAKE_INSTALL_DATADIR}/roq-udp-pub
 
 install(FILES ${CMAKE_SOURCE_DIR}/CHANGELOG.md
         DESTINATION ${CMAKE_INSTALL_DATADIR}/doc/${PROJECT_NAME})
+
+# docs
+
+option(BUILD_DOCS "Enable documentation" OFF)
+
+if(BUILD_DOCS)
+  install(DIRECTORY ${CMAKE_SOURCE_DIR}/share/
+          DESTINATION ${CMAKE_INSTALL_DATADIR}/doc/${PROJECT_NAME})
+endif()
