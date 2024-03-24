@@ -3,79 +3,77 @@
 roq-udp-publisher
 =================
 
-
-Purpose
--------
-
-* UDP (multicast) publisher
-
-
-Description
------------
+UDP (multicast) publisher
 
 The publisher allows you transmit :cpp:class:`CustomMetrics` over UDP (multicast).
 
 
-Conda
------
+Installing
+----------
 
 * :ref:`Using Conda <tutorial-conda>`
 
-.. tab:: Install
-  
-  .. code-block:: bash
-  
-    $ mamba install \
-      --channel https://roq-trading.com/conda/stable \
-      roq-udp-publisher
-  
-.. tab:: Configure
+.. tab:: Stable
 
-  .. code-block:: bash
-  
-    $ cp $CONDA_PREFIX/share/roq-udp-publisher/config.toml $CONFIG_FILE_PATH
-  
-    # Then modify $CONFIG_FILE_PATH to match your specific configuration
-  
-.. tab:: Run
-  
-  .. code-block:: bash
-  
-    $ roq-udp-publisher \
-          --name "udp-publisher" \
-          --config_file "$CONFIG_FILE_PATH" \
-          --service_listen_address "$TCP_LISTEN_PORT_FOR_METRICS" \
-          --listen_address "$TCP_LISTEN_PORT_FOR_WS_CLIENTS" \
-          --flagfile "$FLAG_FILE"
-  
+  .. code-block:: shell
 
-Config
-------
+     $ mamba install \
+           --channel https://roq-trading.com/conda/stable \
+           roq-udp-publisher
 
-.. tab:: Users
-  
-  A list of clients allowed to connect to the publisher.
+.. tab:: Unstable
 
-  .. code-block:: toml
+  .. code-block:: shell
 
-    [users]
-   
-     [users.MD1]
-     username="tbmd1"
+     $ mamba install \
+           --channel https://roq-trading.com/conda/unstable \
+           roq-udp-publisher
 
+
+Using
+-----
+
+.. code-block:: shell
+
+   $ roq-udp-publisher \
+         --name "udp-publisher" \
+         --config_file $CONFIG_FILE_PATH \
+         --client_listen_address $UNIX_SOCKET_PATH \
+         --flagfile $ENVIRONMENT_FLAGFILE
+
+
+.. _roq-udp-publisher-flags:
 
 Flags
 -----
 
 * :ref:`Using Flags <abseil-cpp>`
 
-.. code-block:: bash
+.. code-block:: shell
 
    $ roq-udp-publisher --help
 
 .. tab:: Flags
 
    .. include:: flags/flags.rstinc
+
+
+Configuration
+-------------
+
+* :ref:`Gateway Config <gateway-config>`
+
+.. code-block:: shell
+
+   $ $CONDA_PREFIX/share/roq-udp-publisher/config.toml
+
+.. important::
+
+   The template will be replaced when the software is upgraded.
+   Make a copy and modify to your needs.
+
+.. include:: config.toml
+   :code: toml
 
 
 Constraints
