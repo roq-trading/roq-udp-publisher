@@ -20,6 +20,7 @@ struct Shared final {
   Shared(Shared const &) = delete;
 
   auto discard_symbol(std::string_view const &name) const { return dispatcher_.discard_symbol(name); }
+
   template <typename... Args>
   auto operator()(Args &&...args) {
     return dispatcher_(std::forward<Args>(args)...);

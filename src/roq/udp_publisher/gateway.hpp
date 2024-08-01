@@ -16,6 +16,9 @@ namespace udp_publisher {
 struct Gateway final : public server::Handler {
   Gateway(server::Dispatcher &, Settings const &, Config const &, io::Context &);
 
+  Gateway(Gateway &&) = default;
+  Gateway(Gateway const &) = delete;
+
  protected:
   void operator()(Event<Start> const &) override;
   void operator()(Event<Stop> const &) override;
