@@ -16,7 +16,6 @@ namespace udp_publisher {
 struct Shared final {
   explicit Shared(server::Dispatcher &);
 
-  Shared(Shared &&) = default;
   Shared(Shared const &) = delete;
 
   auto discard_symbol(std::string_view const &name) const { return dispatcher_.discard_symbol(name); }
