@@ -13,7 +13,7 @@ namespace udp_publisher {
 
 // === IMPLEMENTATION ===
 
-Gateway::Gateway(server::Dispatcher &dispatcher, Settings const &, Config const &, io::Context &) : shared_{dispatcher} {
+Gateway::Gateway(server::Dispatcher &dispatcher, Settings const &, Config const &, io::Context &) : dispatcher_{dispatcher}, shared_{dispatcher} {
 }
 
 void Gateway::operator()(Event<Start> const &) {
@@ -25,6 +25,22 @@ void Gateway::operator()(Event<Stop> const &) {
 }
 
 void Gateway::operator()(Event<Timer> const &) {
+}
+
+void Gateway::operator()(Event<Control> const &event) {
+  auto &[message_info, control] = event;
+  switch (control.action) {
+    using enum Action;
+    case UNDEFINED:
+      assert(false);
+      break;
+    case ENABLE:
+      dispatcher_(State::ENABLED);
+      break;
+    case DISABLE:
+      dispatcher_(State::DISABLED);
+      break;
+  }
 }
 
 void Gateway::operator()(Event<Connected> const &) {
