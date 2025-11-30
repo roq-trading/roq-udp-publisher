@@ -66,7 +66,7 @@ Configuration
 
 .. code-block:: shell
 
-   $ $CONDA_PREFIX/share/roq-udp-publisher/config.toml
+   $ --flagfile $CONDA_PREFIX/share/roq-udp-publisher/config.toml
 
 .. important::
 
