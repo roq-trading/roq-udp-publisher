@@ -2,7 +2,7 @@ set(TARGET_NAME ${PROJECT_NAME})
 
 add_subdirectory(flags)
 
-set(SOURCES application.cpp config.cpp gateway.cpp settings.cpp shared.cpp main.cpp)
+set(SOURCES application.cpp config.cpp gateway.cpp shared.cpp main.cpp)
 
 add_executable(${TARGET_NAME} ${SOURCES})
 
@@ -16,7 +16,6 @@ target_link_libraries(
           roq-logging::roq-logging
           roq-logging::roq-logging-flags
           roq-server::roq-server
-          roq-server::roq-server-flags
           fmt::fmt
           unordered_dense::unordered_dense)
 
