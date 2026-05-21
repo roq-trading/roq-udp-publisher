@@ -2,21 +2,28 @@
 
 #pragma once
 
+#include "roq/compat.hpp"
+
 #include "roq/server.hpp"
 
 #include "roq/io/context.hpp"
 
-#include "roq/udp_publisher/config.hpp"
-#include "roq/udp_publisher/settings.hpp"
-#include "roq/udp_publisher/shared.hpp"
+#include "roq/udp_publisher/gateway/config.hpp"
+#include "roq/udp_publisher/gateway/settings.hpp"
+#include "roq/udp_publisher/gateway/shared.hpp"
 
 namespace roq {
 namespace udp_publisher {
+namespace gateway {
 
-struct Gateway final : public server::Handler {
-  Gateway(server::Dispatcher &, Settings const &, Config const &, io::Context &);
+struct Controller final : public server::Handler {
+  ROQ_PUBLIC static std::unique_ptr<server::Handler> create(server::Dispatcher &, Settings const &, Config const &, io::Context &);
 
-  Gateway(Gateway const &) = delete;
+  Controller(server::Dispatcher &, Settings const &, Config const &, io::Context &);
+
+  Controller(Controller const &) = delete;
+
+  virtual ~Controller() = default;
 
  protected:
   void operator()(Event<Start> const &) override;
@@ -55,5 +62,6 @@ struct Gateway final : public server::Handler {
   Shared shared_;
 };
 
+}  // namespace gateway
 }  // namespace udp_publisher
 }  // namespace roq

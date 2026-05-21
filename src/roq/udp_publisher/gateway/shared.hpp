@@ -12,6 +12,7 @@
 
 namespace roq {
 namespace udp_publisher {
+namespace gateway {
 
 struct Shared final {
   explicit Shared(server::Dispatcher &);
@@ -29,5 +30,6 @@ struct Shared final {
   server::Dispatcher &dispatcher_;
 };
 
+}  // namespace gateway
 }  // namespace udp_publisher
 }  // namespace roq

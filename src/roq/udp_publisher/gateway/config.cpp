@@ -1,6 +1,6 @@
 /* Copyright (c) 2017-2026, Hans Erik Thrane */
 
-#include "roq/udp_publisher/config.hpp"
+#include "roq/udp_publisher/gateway/config.hpp"
 
 #include <utility>
 
@@ -10,6 +10,7 @@ using namespace std::literals;
 
 namespace roq {
 namespace udp_publisher {
+namespace gateway {
 
 // === CONSTANTS ===
 
@@ -99,5 +100,6 @@ void Config::operator()(std::string_view const &key, toml::node &) {
   log::warn(R"(Unexpected: key="{}")"sv, key);
 }
 
+}  // namespace gateway
 }  // namespace udp_publisher
 }  // namespace roq
