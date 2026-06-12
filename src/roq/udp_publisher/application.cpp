@@ -18,7 +18,7 @@ int Application::main(args::Parser const &args) {
   flags::Settings settings{args};
   gateway::Config config{settings};
   auto context = server::create_io_context(settings);
-  server::MarketData2<gateway::Controller>{settings, config, *context}.dispatch();
+  server::MarketData<gateway::Controller>{settings, config, *context}.dispatch();
   return EXIT_SUCCESS;
 }
 
